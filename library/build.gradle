@@ -1,0 +1,59 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
+
+android {
+    compileSdkVersion 27
+
+
+
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 27
+        versionCode 1
+        versionName "0.0.1"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation group: 'com.nostra13.universalimageloader', name: 'universal-image-loader', version: '1.9.5'
+    provided 'com.android.support:appcompat-v7:27.0.2'
+}
+
+uploadArchives {
+    apply plugin: 'maven'
+    repositories.mavenDeployer {
+        name = 'mavenCentralReleaseDeployer'
+        repository(url: "http://128.0.9.253:8081/nexus/content/repositories/releases/") {
+            authentication(userName: NEXUS_USERNAME, password: NEXUS_PASSWORD)
+        }
+        pom.version = "0.0.1"
+        pom.artifactId = "f-android-image-viewer-library"
+        pom.groupId = "cn.faury.android.library"
+        pom.name = "f-android-image-viewer-library"
+        pom.packaging = "aar"
+    }
+}
+
+publish {
+// gradlew clean build bintrayUpload -PbintrayUser=用户名 -PbintrayKey=apikey -PdryRun=false
+    userOrg = 'faury'//bintray.com用户名
+    bintrayUser = BINTRAY_USER
+    bintrayKey = BINTRAY_KEY
+    dryRun = false
+    groupId = 'cn.faury.android.library'//jcenter上的路径
+    artifactId = 'f-android-image-viewer-library'//项目名称
+    publishVersion = '0.0.1'//版本号
+    desc = 'this is an andriod image viewer library'//描述，不重要
+    website = 'https://github.com/fzyycp/f-android-image-viewer-library'//github上的地址
+}

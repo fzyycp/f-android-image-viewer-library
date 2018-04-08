@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_show_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/iv_show_image_back"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/go_black"
+            android:padding="10dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="10dp">
+            <TextView
+                android:id="@+id/tv_show_image_count_now"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:textColor="#ffffff"
+                android:textSize="18dp"
+                android:text="@string/image_count"
+                android:gravity="center"
+                />
+
+            <TextView
+                android:id="@+id/tv_show_image_count_total"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:textColor="#ffffff"
+                android:text="@string/image_count"
+                android:gravity="center"
+                />
+        </LinearLayout>
+
+    </RelativeLayout>
+</RelativeLayout>

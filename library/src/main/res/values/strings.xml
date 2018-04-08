@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">f-android-image-viewer-library</string>
+    <string name="image_count">%1$d/</string>
+</resources>
