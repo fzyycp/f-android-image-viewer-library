@@ -12,9 +12,9 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.ImageView;
 
-import cn.faury.android.library.easing.Cubic;
-import cn.faury.android.library.easing.Easing;
-import cn.faury.android.library.graphics.FastBitmapDrawable;
+import cn.faury.android.library.viewer.image.easing.Cubic;
+import cn.faury.android.library.viewer.image.easing.Easing;
+import cn.faury.android.library.viewer.image.graphics.FastBitmapDrawable;
 
 /**
  * Base View to manage image zoom/scrool/pinch operations

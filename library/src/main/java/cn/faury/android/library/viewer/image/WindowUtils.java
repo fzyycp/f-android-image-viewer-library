@@ -3,10 +3,6 @@ package cn.faury.android.library.viewer.image;
 import android.content.Context;
 import android.view.WindowManager;
 
-/**
- * Created by lei.pan on 2017/2/7.
- */
-
 public class WindowUtils {
     private static Context mContext;
 
