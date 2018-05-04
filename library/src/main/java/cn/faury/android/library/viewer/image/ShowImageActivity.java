@@ -6,23 +6,19 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.nostra13.universalimageloader.cache.disc.impl.ext.LruDiskCache;
-import com.nostra13.universalimageloader.cache.disc.naming.HashCodeFileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.faury.android.library.image.loader.FImageLoader;
 
 public class ShowImageActivity extends Activity implements View.OnClickListener{
 
@@ -73,10 +69,10 @@ public class ShowImageActivity extends Activity implements View.OnClickListener{
         setContentView(R.layout.activity_show_image);
         setImageLoad();
 
-        mVpImageView = (ViewPager) findViewById(R.id.vp_show_image);
-        mIvBack = (ImageView) findViewById(R.id.iv_show_image_back);
-        mTvImageCountNow = (TextView) findViewById(R.id.tv_show_image_count_now);
-        mTvImageCountTotal = (TextView) findViewById(R.id.tv_show_image_count_total);
+        mVpImageView = findViewById(R.id.vp_show_image);
+        mIvBack = findViewById(R.id.iv_show_image_back);
+        mTvImageCountNow = findViewById(R.id.tv_show_image_count_now);
+        mTvImageCountTotal = findViewById(R.id.tv_show_image_count_total);
 
         mIvBack.setOnClickListener(this);
 
@@ -95,15 +91,15 @@ public class ShowImageActivity extends Activity implements View.OnClickListener{
             {
                 view.findViewById(R.id.iv_show_iamge_zoom).setVisibility(View.VISIBLE);
                 view.findViewById(R.id.iv_show_iamge_normal).setVisibility(View.GONE);
-                mIvShowImage = (ImageView) view.findViewById(R.id.iv_show_iamge_zoom);
-                ImageLoader.getInstance().displayImage(mUrls.get(i).trim(),mIvShowImage , mOptions);
+                mIvShowImage = view.findViewById(R.id.iv_show_iamge_zoom);
+                mImageLoader.displayImage(mUrls.get(i).trim(),mIvShowImage , mOptions);
             }
             else
             {
                 view.findViewById(R.id.iv_show_iamge_zoom).setVisibility(View.GONE);
                 view.findViewById(R.id.iv_show_iamge_normal).setVisibility(View.VISIBLE);
-                mIvShowImage = (ImageView) view.findViewById(R.id.iv_show_iamge_normal);
-                ImageLoader.getInstance().displayImage(mUrls.get(i).trim(),mIvShowImage , mOptions);
+                mIvShowImage = view.findViewById(R.id.iv_show_iamge_normal);
+                mImageLoader.displayImage(mUrls.get(i).trim(),mIvShowImage , mOptions);
             }
             mViews.add(view);
         }
@@ -142,35 +138,7 @@ public class ShowImageActivity extends Activity implements View.OnClickListener{
 
     private void setImageLoad()
     {
-
-        File file = new File(Environment.getExternalStorageDirectory(), "temp/Image");
-        if (!file.exists())
-        {
-            file.mkdirs();
-        }
-        mImageLoader = ImageLoader.getInstance();
-        ImageLoaderConfiguration config2 = null;
-        try {
-            config2 = new ImageLoaderConfiguration.Builder(this)
-                    .threadPoolSize(3)
-                    .memoryCache(new MyLruMemoryCache(2 * 1024 * 1024))
-                    .memoryCacheSizePercentage(13)
-                    .diskCache(new LruDiskCache(file, new HashCodeFileNameGenerator() // 磁盘缓存
-                    {
-                        @Override
-                        public String generate(String imageUri)
-                        {
-                            String[] string = imageUri.split("\\?");
-                            imageUri = string.length > 0 ? string[0] : imageUri;
-                            return super.generate(imageUri);
-                        }
-                    }, 50 * 1024 * 1024))
-                    .diskCacheFileCount(100).writeDebugLogs()
-                    .build();
-            mImageLoader.init(config2);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        mImageLoader = FImageLoader.createInstance(this);
         mOptions = new DisplayImageOptions.Builder().cacheInMemory(true)
                 .cacheOnDisk(true)
                 .showImageOnLoading(R.mipmap.image_on_loading)           //加载图片时的图片

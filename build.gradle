@@ -6,6 +6,9 @@ buildscript {
         maven {
             url = "https://dl.bintray.com/faury/maven"
         }
+        maven{
+            url = "http://128.0.9.253:8081/nexus/content/repositories/releases/"
+        }
         google()
         jcenter()
     }
@@ -23,6 +26,9 @@ allprojects {
     repositories {
         maven {
             url = "https://dl.bintray.com/faury/maven"
+        }
+        maven{
+            url = "http://128.0.9.253:8081/nexus/content/repositories/releases/"
         }
         google()
         jcenter()
