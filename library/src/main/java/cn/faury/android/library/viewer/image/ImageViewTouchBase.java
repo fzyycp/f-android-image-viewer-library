@@ -350,7 +350,6 @@ public abstract class ImageViewTouchBase extends ImageView implements IDisposabl
 	 * 
 	 * @param bitmap
 	 *           the {@link Bitmap} to display
-	 * @see {@link ImageView#setImageBitmap(Bitmap)}
 	 */
 	@Override
 	public void setImageBitmap( final Bitmap bitmap ) {
@@ -379,7 +378,7 @@ public abstract class ImageViewTouchBase extends ImageView implements IDisposabl
 
 	/**
 	 * 
-	 * Note: if the scaleType is FitToScreen then min_zoom must be <= 1 and max_zoom must be >= 1
+	 * Note: if the scaleType is FitToScreen then min_zoom must be &le; 1 and max_zoom must be &ge; 1
 	 * 
 	 * @param drawable
 	 *           the new drawable
@@ -593,15 +592,13 @@ public abstract class ImageViewTouchBase extends ImageView implements IDisposabl
 
 	/**
 	 * Called just after a new Matrix has been assigned.
-	 * 
-	 * @see {@link #setImageMatrix(Matrix)}
 	 */
 	protected void onImageMatrixChanged() {}
 
 	/**
-	 * Returns the current image display matrix.<br />
+	 * Returns the current image display matrix.
 	 * This matrix can be used in the next call to the {@link #setImageDrawable(Drawable, Matrix, float, float)} to restore the same
-	 * view state of the previous {@link Bitmap}.<br />
+	 * view state of the previous {@link Bitmap}.
 	 * Example:
 	 * 
 	 * <pre>

@@ -1,3 +1,4 @@
+
 apply plugin: 'com.android.library'
 apply plugin: 'com.novoda.bintray-release'
 
@@ -18,13 +19,16 @@ android {
         }
     }
 
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation 'cn.faury.android.library:f-android-image-loader-library:0.0.1'
-    compileOnly 'com.android.support:appcompat-v7:27.0.2'
+    implementation 'cn.faury.android.library:f-android-image-loader-library:0.0.2'
+    compileOnly 'com.android.support:appcompat-v7:27.1.1'
 }
 
 uploadArchives {
